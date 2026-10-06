@@ -1,0 +1,338 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Tulasi Product Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single-column case-study portfolio. Each project is a "register" sheet: a labelled strip of facts, then problem, what I owned, result. */
+:root {
+  --bg: #F2F5F4;
+  --surface: #FFFFFF;
+  --fg: #14232B;
+  --muted: #55666E;
+  --line: #D5DEDC;
+  --accent: #0E6F66;
+  --accent-soft: #DCEFEC;
+  --signal: #B87A0A;
+  --f-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --f-body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1A1F; --surface: #15262D; --fg: #E6EEEC; --muted: #9DB0B0;
+    --line: #26393F; --accent: #4FC3B5; --accent-soft: #163A3A; --signal: #E3A93B;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1A1F; --surface: #15262D; --fg: #E6EEEC; --muted: #9DB0B0;
+  --line: #26393F; --accent: #4FC3B5; --accent-soft: #163A3A; --signal: #E3A93B;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 400 16px/1.6 var(--f-body);
+  padding-inline: 20px; padding-block: 40px 64px;
+}
+.wrap { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.12; }
+p { margin: 0; max-width: 65ch; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.label { font: 500 12px/1.2 var(--f-mono); letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+
+/* header */
+header { display: flex; flex-direction: column; gap: 20px; }
+h1 { font-size: clamp(38px, 7vw, 64px); font-weight: 700; letter-spacing: -.02em; }
+.role { font: 500 18px/1.4 var(--f-body); color: var(--accent); }
+.lede { font-size: 18px; color: var(--fg); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 4px 0 0; list-style: none; }
+.contact { display: flex; flex-wrap: wrap; gap: 6px 24px; font: 400 14px/1.4 var(--f-mono); overflow-wrap: anywhere; }
+.facts li { font: 400 13px/1 var(--f-mono); padding: 8px 10px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); }
+
+section { display: flex; flex-direction: column; gap: 24px; }
+h2 { font-size: 28px; font-weight: 700; }
+.head-row { display: flex; flex-direction: column; gap: 6px; }
+
+/* case study sheets */
+.case { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; display: flex; flex-direction: column; min-width: 0; }
+.case-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; padding: 14px 20px; border-bottom: 1px solid var(--line); background: var(--accent-soft); }
+.case-top .label { color: var(--accent); }
+.case-body { padding: 24px 20px 26px; display: flex; flex-direction: column; gap: 22px; }
+.case h3 { font-size: 26px; font-weight: 700; }
+.case .sub { color: var(--muted); margin-top: 6px; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px 28px; }
+.col { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.col ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.col li { max-width: 62ch; }
+.col li::marker { color: var(--accent); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.stat { border-top: 2px solid var(--accent); padding-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+.stat b { font: 700 28px/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 13px; color: var(--muted); line-height: 1.35; }
+
+/* module chain: the real data flow between registers */
+.chain { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.node { font: 500 13px/1 var(--f-mono); padding: 9px 11px; border: 1px solid var(--accent); border-radius: 4px; background: var(--bg); }
+.node.out { border-color: var(--signal); }
+.arrow { color: var(--muted); font-family: var(--f-mono); }
+.chain-note { font-size: 13px; color: var(--muted); }
+
+/* working method */
+.method { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+.m { padding: 18px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.m h3 { font-size: 18px; }
+.m p { font-size: 15px; color: var(--muted); }
+
+.tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; }
+.tags li { font: 400 13px/1 var(--f-mono); padding: 8px 10px; border-radius: 4px; background: var(--accent-soft); color: var(--fg); }
+
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+.two > div { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.rows { display: flex; flex-direction: column; }
+.row { display: flex; flex-direction: column; gap: 2px; padding: 12px 0; border-top: 1px solid var(--line); }
+.row b { font-weight: 600; }
+.row span { color: var(--muted); font-size: 15px; }
+
+footer { border-top: 1px solid var(--line); padding-top: 20px; font-size: 14px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+/* polish pass */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; background: var(--bg); border-bottom: 1px solid var(--line); margin-bottom: -24px; }
+.nav-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.nav a { font: 500 13px/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 6px 0; }
+.nav a:hover { color: var(--accent); }
+.nav .brand { color: var(--fg); font-family: var(--f-display); font-weight: 700; font-size: 16px; letter-spacing: 0; text-transform: none; }
+#theme { font: 500 12px/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px; cursor: pointer; }
+#theme:hover { border-color: var(--accent); }
+section[id] { scroll-margin-top: 72px; }
+
+header { position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 36px 28px 32px; gap: 18px; }
+header > * { position: relative; z-index: 1; }
+header::before { content: ""; position: absolute; inset: 0 0 0 auto; width: 46%; background: repeating-linear-gradient(to bottom, transparent 0 31px, var(--line) 31px 32px), repeating-linear-gradient(to right, transparent 0 63px, var(--line) 63px 64px); -webkit-mask-image: linear-gradient(to left, #000, transparent); mask-image: linear-gradient(to left, #000, transparent); opacity: .7; }
+@media (max-width: 640px) { header::before { display: none; } header { padding: 28px 20px 24px; } }
+h1 { font-size: clamp(42px, 8vw, 72px); }
+.role { max-width: 36ch; }
+.lede { max-width: 56ch; color: var(--fg); }
+.contact a { color: var(--fg); text-underline-offset: 3px; text-decoration-color: var(--accent); }
+.contact span { color: var(--muted); }
+
+h2 { font-size: clamp(26px, 4vw, 34px); letter-spacing: -.01em; }
+.head-row { padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.case { transition: border-color .15s, box-shadow .15s; }
+.case:hover { border-color: var(--accent); box-shadow: 0 6px 24px -14px var(--accent); }
+.case-body { padding: 28px 24px 30px; gap: 26px; }
+.case h3 { font-size: clamp(24px, 3.4vw, 30px); letter-spacing: -.01em; }
+.col > .label { padding-bottom: 6px; border-bottom: 1px dashed var(--line); }
+.stats { padding: 4px 0; }
+.stat b { font-size: 34px; color: var(--accent); }
+.chain { padding: 12px; border: 1px dashed var(--line); border-radius: 4px; background: var(--bg); }
+.node { background: var(--surface); }
+.arrow { font-size: 14px; }
+.m { transition: border-color .15s; border-top: 3px solid var(--accent); }
+.m:hover { border-color: var(--accent); }
+.m h3 { font-size: 19px; }
+.tags li { border: 1px solid transparent; }
+.tags li:hover { border-color: var(--accent); }
+footer { padding-top: 24px; }
+@media (prefers-reduced-motion: reduce) { .case, .m { transition: none; } }
+@media (prefers-reduced-motion: no-preference) { a { transition: opacity .15s; } a:hover { opacity: .75; } }
+</style>
+
+<div class="wrap">
+
+<nav class="nav" aria-label="Sections">
+  <a class="brand" href="#top">T. Lidhade</a>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+  </div>
+  <button id="theme" type="button" aria-label="Switch colour theme">Theme</button>
+</nav>
+
+<header id="top">
+  <span class="label">Product portfolio · Kolhapur, India</span>
+  <h1>Tulasi Lidhade</h1>
+  <div class="role">Technical Project Coordinator moving into Product Management</div>
+  <p class="lede">I take a product from field research to a build-ready specification and see it through delivery. My strongest work is in government digital health, with experience in AI public safety, Industrial IoT and Enterprise ERP.</p>
+  <ul class="facts">
+    <li>2+ years · Velodynamics</li>
+    <li>Requirements</li>
+    <li>Specification</li>
+    <li>Delivery</li>
+  </ul>
+  <div class="contact">
+    <a href="https://www.linkedin.com/in/tulasi-lidhade-947a4b210">linkedin.com/in/tulasi-lidhade-947a4b210</a>
+    <span>lidhadetulsi6666@gmail.com</span>
+  </div>
+</header>
+
+<section id="skills">
+  <div class="head-row">
+    <span class="label">What I do</span>
+    <h2>Product skills</h2>
+  </div>
+  <div class="method">
+    <div class="m"><h3>User and field research</h3><p>On-site interviews with frontline staff and supervisors to map real workflows, approval chains and reporting needs.</p></div>
+    <div class="m"><h3>Requirements and specs</h3><p>Change request documents with field-level logic, conditional rules, defaults and edge cases that developers and testers can build and test from.</p></div>
+    <div class="m"><h3>Prototyping</h3><p>Responsive HTML dashboards and form prototypes used to confirm indicators and layouts before development starts.</p></div>
+    <div class="m"><h3>Scope and roadmap</h3><p>Phased plans with stabilisation and hypercare windows, clear dependencies, and early flags on scope that does not match the real need.</p></div>
+    <div class="m"><h3>Stakeholder management</h3><p>Working across government officials, technology partners, managers and a cross-functional engineering team.</p></div>
+    <div class="m"><h3>Delivery coordination</h3><p>Backlog grooming, release planning, UAT sign-off and documentation, from kickoff to handover.</p></div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="head-row">
+    <span class="label">Selected work</span>
+    <h2>Projects</h2>
+  </div>
+
+  <article class="case">
+    <div class="case-top"><span class="label">Flagship</span><span class="label">Digital health · Government</span></div>
+    <div class="case-body">
+      <div>
+        <h3>Asha Sathi</h3>
+        <p class="sub">A digital management system for ASHA health workers, replacing paper registers and scattered Excel files.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>6</b><span>register modules specified end to end</span></div>
+        <div class="stat"><b>19</b><span>dashboard indicators defined and confirmed</span></div>
+        <div class="stat"><b>23</b><span>reports delivered from the inventory</span></div>
+        <div class="stat"><b>2</b><span>on-site survey rounds</span></div>
+      </div>
+      <div class="col">
+        <span class="label">My involvement, end to end</span>
+        <div class="chain" role="img" aria-label="Survey, requirements, specifications, prototypes, build, handover">
+          <span class="node">Field survey</span><span class="arrow">→</span>
+          <span class="node">Requirements</span><span class="arrow">→</span>
+          <span class="node">Change requests</span><span class="arrow">→</span>
+          <span class="node">Prototypes</span><span class="arrow">→</span>
+          <span class="node">Build</span><span class="arrow">→</span>
+          <span class="node out">Handover</span>
+        </div>
+      </div>
+      <div class="cols">
+        <div class="col">
+          <span class="label">Research and requirements</span>
+          <ul>
+            <li>Surveyed health centre staff on site and mapped workflows and approvals.</li>
+            <li>Tied each finding to the government report it feeds.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <span class="label">Specification</span>
+          <ul>
+            <li>Wrote change requests for six register modules with conditional logic and auto-triggers.</li>
+            <li>Defined dashboard indicators and a phased scope.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <span class="label">Build and handover</span>
+          <ul>
+            <li>Prototyped dashboards in HTML to confirm them before development.</li>
+            <li>Worked with the build team on plan, risks and delivery, then prepared the handover.</li>
+          </ul>
+        </div>
+      </div>
+      <ul class="tags"><li>Field research</li><li>Requirements</li><li>Change requests</li><li>Prototyping</li><li>Roadmap</li><li>Handover</li></ul>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="case-top"><span class="label">Project</span><span class="label">Digital health · NHM</span></div>
+    <div class="case-body">
+      <div>
+        <h3>NHM reporting and programme modules</h3>
+        <p class="sub">Specifications for newborn, post-natal and nutrition modules in India's National Health Mission ecosystem.</p>
+      </div>
+      <div class="cols">
+        <div class="col">
+          <span class="label">Post-natal care report</span>
+          <p>Designed the report from register data, with field structure and mapping to HMIS, RCH and MCTS-RCH.</p>
+        </div>
+        <div class="col">
+          <span class="label">Birth and newborn unit logic</span>
+          <p>Specified cascading admission fields and compulsory-field rules, with automatic links between modules.</p>
+        </div>
+        <div class="col">
+          <span class="label">Nutrition centre module</span>
+          <p>Defined the visit schedule, follow-up fields and admission form, reusing an existing table structure.</p>
+        </div>
+      </div>
+      <ul class="tags"><li>Data mapping</li><li>Business rules</li><li>Government systems</li><li>Meeting minutes</li></ul>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="case-top"><span class="label">Project</span><span class="label">AI-enabled public safety</span></div>
+    <div class="case-body">
+      <div>
+        <h3>Hospital command centre and Safe City monitoring</h3>
+        <p class="sub">Computer-vision products for government hospitals and for city crowd and traffic management.</p>
+      </div>
+      <div class="cols">
+        <div class="col">
+          <span class="label">Command centre</span>
+          <p>Defined video surveillance SOPs around what senior officials need to see, so alerts map to decisions.</p>
+        </div>
+        <div class="col">
+          <span class="label">Safe City AI</span>
+          <p>Worked on requirements and coordination for an AI system using CCTV and sensor data.</p>
+        </div>
+      </div>
+      <ul class="tags"><li>SOP design</li><li>AI product scoping</li><li>Client coordination</li></ul>
+    </div>
+  </article>
+</section>
+
+<section class="two" id="experience">
+  <div>
+    <div class="head-row"><span class="label">Background</span><h2>Experience</h2></div>
+    <div class="rows">
+      <div class="row"><b>Technical Project Coordinator · Velodynamics</b><span>Digital health, AI public safety, Industrial IoT and Enterprise ERP programmes.</span></div>
+      <div class="row"><b>Veloce Group</b><span>Cross-functional coordination, requirement discovery, backlog grooming, release planning and UAT sign-off.</span></div>
+    </div>
+  </div>
+  <div>
+    <div class="head-row"><span class="label">Toolkit</span><h2>Tools and methods</h2></div>
+    <div class="rows">
+      <div class="row"><b>Planning and tracking</b><span>Jira, Microsoft Excel project plans, roadmaps, risk and dependency logs</span></div>
+      <div class="row"><b>Delivery</b><span>Backlog grooming, release planning, sprint coordination, UAT sign-off</span></div>
+      <div class="row"><b>Documentation</b><span>Microsoft Word for change requests, scope documents and meeting minutes; formal correspondence</span></div>
+      <div class="row"><b>Reporting</b><span>Status reports, report inventories, dashboard indicator definitions</span></div>
+      <div class="row"><b>Productivity</b><span>Claude for drafting, analysis and prototyping</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="label">Next</span>
+  <p>Open to Associate Product Manager and Product Owner roles, with a strong interest in digital health and civic technology.</p>
+  <div class="contact">
+    <a href="https://www.linkedin.com/in/tulasi-lidhade-947a4b210">linkedin.com/in/tulasi-lidhade-947a4b210</a>
+    <span>lidhadetulsi6666@gmail.com</span>
+  </div>
+</footer>
+
+</div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById('theme');
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function label() { btn.textContent = isDark() ? 'Light' : 'Dark'; }
+  btn.addEventListener('click', function () {
+    root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
+    label();
+  });
+  label();
+})();
+</script>
+
+</body></html>
